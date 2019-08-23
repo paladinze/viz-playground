@@ -23,6 +23,7 @@ header {
   background-position: center;
   background-size: cover;
   height: 100vh;
+  background-attachment: fixed;
 }
 
 .hero-text-box {
@@ -58,6 +59,17 @@ h2:after {
   content: " ";
   margin: 0 auto;
   margin-top: 20px;
+}
+
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  content: ".";
+  clear: both;
+  display: block;
+  height: 0;
+  visibility: hidden;
 }
 
 .btn:link,
@@ -133,4 +145,42 @@ section {
 .event-image img:hover {
   opacity: 1;
   transform: scale(1.05);
+}
+
+.quote {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url(assets/yellow_sea.jpg);
+  background-size: cover;
+  color: white;
+  background-attachment: fixed;
+}
+
+blockquote {
+  padding: 2%;
+  font-style: italic;
+  line-height: 145%;
+  position: relative;
+}
+
+blockquote:before {
+  content: "\201c";
+  font-size: 400%;
+  display: block;
+  position: absolute;
+  top: -3px;
+  left: -25px;
+}
+
+cite {
+  font-size: 90%;
+  margin-top: 25px;
+  display: block;
+}
+
+.quote cite img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 0 10px;
+  vertical-align: middle;
 }
