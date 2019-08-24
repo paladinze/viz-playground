@@ -39,13 +39,13 @@ body {
   position: relative;
 }
 
-.logo-box {
+.header__logo-box {
   position: absolute;
   top: 4rem;
   left: 4rem;
 }
 
-.logo {
+.header__logo {
   height: 6rem;
 }
 
@@ -58,20 +58,20 @@ body {
   backface-visibility: hidden;
   margin-bottom: 6rem;
 }
-.heading-primary-main {
+.heading-primary--main {
   display: block;
   font-size: 6rem;
   font-weight: 400;
   letter-spacing: 3.5rem;
 }
-.heading-primary-sub {
+.heading-primary--sub {
   display: block;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1.8rem;
 }
 
-.header-content {
+.header__content {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -113,8 +113,6 @@ body {
   border-radius: 4.5rem;
   transition: all 0.2s;
   position: relative;
-  animation-name: moveFromBottom;
-  animation-duration: 1s;
 }
 
 .btn:hover {
@@ -127,7 +125,7 @@ body {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.btn-white {
+.btn--white {
   background: white;
   color: #777;
 }
@@ -144,11 +142,17 @@ body {
   z-index: -1;
   transition: all 0.4s;
 }
-.btn-white::after {
+.btn--white::after {
   background: white;
 }
 
 .btn:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
+}
+
+.btn--animated {
+  animation-name: moveFromBottom;
+  animation-duration: 1s;
+  animation-fill-mode: backwards;
 }
