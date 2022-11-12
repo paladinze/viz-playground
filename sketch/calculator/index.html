@@ -27,7 +27,7 @@
             display: grid;
             justify-content: center;
             align-items: center;
-            grid-template-columns: repeat(4, 100px) ;
+            grid-template-columns: repeat(4, 100px);
             grid-template-rows: minmax(120px, auto) repeat(5, 100px);
         }
 
@@ -79,31 +79,137 @@
 <body>
 <div class="grid">
     <div class="output">
-        <div class="prev-result">123 + 456</div>
-        <div class="curr-result">78123123123123123123123123129</div>
+        <div class="prev-result" data-prev></div>
+        <div class="curr-result" data-curr></div>
     </div>
-    <button class="span-two">AC</button>
-    <button>DEL</button>
-    <button>÷</button>
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>*</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>+</button>
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
-    <button>-</button>
-    <button>.</button>
-    <button>0</button>
-    <button class="span-two">=</button>
+    <button class="span-two" data-clear>AC</button>
+    <button data-delete>DEL</button>
+    <button data-op>÷</button>
+    <button data-num>1</button>
+    <button data-num>2</button>
+    <button data-num>3</button>
+    <button data-op>*</button>
+    <button data-num>4</button>
+    <button data-num>5</button>
+    <button data-num>6</button>
+    <button data-op>+</button>
+    <button data-num>7</button>
+    <button data-num>8</button>
+    <button data-num>9</button>
+    <button data-op>-</button>
+    <button data-num>.</button>
+    <button data-num>0</button>
+    <button class="span-two" data-compute>=</button>
 </div>
 
 
 <script>
+  class Calculator {
+    constructor(prevEl, currEl) {
+      this.prevEl = prevEl;
+      this.currEl = currEl;
+      this.clear();
+    }
+
+    clear() {
+      this.prevResult = '';
+      this.currResult = '';
+      this.op = null;
+      this.updateDisplay();
+    }
+
+    appendNum(num) {
+      if (this.currResult.includes('.') && num === '.') return;
+      this.currResult += `${num}`;
+      this.updateDisplay()
+    }
+
+    deleteNum() {
+      if (!this.currResult.length) return;
+      this.currResult = this.currResult.slice(0, this.currResult.length - 1)
+      this.updateDisplay()
+    }
+
+    setOp(op) {
+      if (!this.currResult.length && !this.prevResult.length) return;
+      if (this.prevResult.length) {
+        this.compute();
+      }
+      console.log(this.prevResult, this.currResult, this.op)
+      this.prevResult = this.currResult;
+      this.currResult = '';
+      this.op = op;
+      this.updateDisplay();
+    }
+
+    compute() {
+      const prev = parseFloat(this.prevResult);
+      const curr = parseFloat(this.currResult);
+      let result;
+      if (this.op === '+') {
+        result = prev + curr;
+      } else if (this.op === '-') {
+        result = prev - curr;
+      } else if (this.op === '*') {
+        result = prev * curr;
+      } else if (this.op === '/') {
+        result = prev / curr;
+      }
+      this.currResult = result.toString();
+      this.op = null;
+      this.prevResult = '';
+      console.log(result)
+      this.updateDisplay();
+    }
+
+    updateDisplay() {
+      function formatNum(str) {
+        if (!str) return str;
+        return parseFloat(str).toLocaleString();
+      }
+
+      prevResult.innerText = formatNum(this.prevResult);
+      currResult.innerText = formatNum(this.currResult);
+    }
+  }
+
+  // display
+  const prevResult = document.querySelector('[data-prev]')
+  const currResult = document.querySelector('[data-curr]')
+
+  // general op
+  const clearOp = document.querySelector('[data-clear]')
+  const deleteOp = document.querySelector('[data-delete]')
+  const computeOp = document.querySelector('[data-compute]')
+  clearOp.addEventListener('click', () => {
+    calc.clear();
+  });
+  deleteOp.addEventListener('click', () => {
+    calc.deleteNum();
+  })
+  computeOp.addEventListener('click', () => {
+    calc.compute();
+  })
+
+  // math op
+  const mathOps = document.querySelectorAll('[data-op]');
+  mathOps.forEach(el => {
+    el.addEventListener('click', () => {
+      calc.setOp(el.innerText);
+    });
+  })
+
+  // numbers
+  const numElements = document.querySelectorAll('[data-num]');
+  numElements.forEach(el => {
+    el.addEventListener('click', (event) => {
+      const currEl = event.target;
+      calc.appendNum(currEl.innerText);
+    })
+  })
+
+  const calc = new Calculator()
+  calc.updateDisplay('123', '232')
 
 </script>
 </body>
