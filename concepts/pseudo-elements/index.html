@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pseudo Elements</title>
+    <style>
+        .required {
+            position: relative;
+        }
+
+        .required:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            display: block;
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background-color: red;
+        }
+
+        .required::before {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+<label for="name" class="required" data-tooltip="name's tooltip">Name</label>
+<input id="name" type="text" required>
+<button data-tooltip="Tooltip">Submit form</button>
+</body>
+</html>

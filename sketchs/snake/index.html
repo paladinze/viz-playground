@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+<head>
+    <style>
+        #container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50vh;
+            height: 50vh;
+        }
+        #board {
+            width: 100%;
+            height: 100%;
+        }
+        #score {
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 50px;
+            font-size: 50px;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="score">Score: 0</div>
+    <canvas id="board" width="800" height="800"></canvas>
+</div>
+<script>
+  const board = document.getElementById("board");
+  const ctx = board.getContext("2d");
+  let snake = [{x: 200, y: 200}, {x: 190, y: 200}, {x: 180, y: 200}, {x: 170, y: 200}, {x: 160, y: 200},];
+  let food = null;
+  let score = 0;
+
+  const BOARD_BACKGROUND = 'Black';
+  const BOARD_BORDER = 'silver';
+  const STEP = 20;
+  const DIRECTIONS = {
+    up: {
+      dx: 0,
+      dy: -STEP
+    },
+    left: {
+      dx: -STEP,
+      dy: 0,
+    },
+    right: {
+      dx: STEP,
+      dy: 0
+    },
+    down: {
+      dx: 0,
+      dy: STEP
+    }
+  }
+  let currDir = DIRECTIONS.right
+
+  function clearCanvas() {
+    ctx.fillStyle = BOARD_BACKGROUND;
+    ctx.strokeStyle = BOARD_BORDER;
+    ctx.fillRect(0, 0, board.width, board.height);
+    ctx.strokeRect(0, 0, board.width, board.height);
+  }
+
+  function drawSnakePart(part) {
+    ctx.fillStyle = 'lightSalmon';
+    ctx.strokeStyle = 'coral';
+    ctx.fillRect(part.x, part.y, STEP, STEP);
+    ctx.strokeRect(part.x, part.y, STEP, STEP);
+  }
+
+  function drawSnake() {
+    snake.forEach(drawSnakePart);
+  }
+
+  function moveSnake() {
+    const head = {
+      x: snake[0].x + currDir.dx,
+      y: snake[0].y + currDir.dy
+    };
+    snake.unshift(head);
+    if (head.x === food?.x && head.y === food?.y) {
+        score += Math.floor(Math.max(Math.random() * 10, 5));
+        updateScoreMsg(`Score: ${score}`);
+        food = generateFood();
+    } else {
+        snake.pop();
+    }
+
+  }
+
+  function detectGameEnd(headPos, snake) {
+    // hit snake body
+    if (snake.find((part, index) => {
+      if (index === 0) return false;
+      return headPos.x === part.x && headPos.y === part.y;
+    })) {
+      return true;
+    }
+
+    // out of bounds
+    if (
+      headPos.x >= board.width || headPos.x < 0 ||
+      headPos.y >= board.height || headPos.y < 0
+    ) {
+      return true
+    }
+    return false;
+  }
+
+
+
+  function changeDirection(event) {
+    const code = event.keyCode;
+    if (code === 37 && currDir !== DIRECTIONS.right) {
+      currDir = DIRECTIONS.left
+    }
+    if (code === 38 && currDir !== DIRECTIONS.down) {
+      currDir = DIRECTIONS.up
+    }
+    if (code === 39 && currDir !== DIRECTIONS.left) {
+      currDir = DIRECTIONS.right
+    }
+    if (code === 40 && currDir !== DIRECTIONS.up) {
+      currDir = DIRECTIONS.down
+    }
+
+  }
+
+  function drawFood(pos) {
+    ctx.strokeStyle = 'dodgerBlue';
+    ctx.fillStyle = 'red';
+    ctx.strokeRect(pos.x, pos.y, STEP, STEP);
+    ctx.fillRect(pos.x, pos.y, STEP, STEP);
+  }
+
+  function generateFood() {
+    function getRandomPos(min, max) {
+      return Math.floor((Math.random() * (max - min) + min) / STEP) * STEP
+    }
+
+    function collidesWithBody(pos, snake) {
+      return snake.find((part) => part.x === pos.x && part.y === pos.y);
+    }
+
+    let foodPos = {
+      x: getRandomPos(0, board.width),
+      y: getRandomPos(0, board.height)
+    }
+    while (collidesWithBody(foodPos, snake)) {
+      foodPos = {
+        x: getRandomPos(0, board.width),
+        y: getRandomPos(0, board.height)
+      }
+    }
+    return foodPos;
+  }
+
+  function updateScoreMsg(msg) {
+    const score = document.getElementById('score');
+    score.innerText = msg;
+  }
+
+  function main() {
+    document.addEventListener('keydown', changeDirection);
+    animate();
+  }
+
+  let lastMoveTime = Date.now();
+  const snakeSpeed = 10; // 10 steps per second
+  function animate() {
+    let currentTime = Date.now();
+    const elapsedTime =  Date.now() - lastMoveTime;
+
+    if ((snakeSpeed * elapsedTime / 1000) < 1) {
+      requestAnimationFrame(animate);
+      return;
+    }
+    lastMoveTime = currentTime;
+
+    if (detectGameEnd(snake[0], snake)) {
+      updateScoreMsg('Game Over');
+    }
+    clearCanvas();
+    food && drawFood(food);
+    drawSnake();
+    moveSnake();
+
+    if (!food) {
+      food = generateFood();
+    }
+    requestAnimationFrame(() => {
+      animate();
+    })
+  }
+
+  main();
+</script>
+</body>
+
+</html>

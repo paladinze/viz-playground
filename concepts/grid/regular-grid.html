@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            display: grid;
+            grid-template: repeat(3, 1fr) / repeat(5, 1fr);
+            /*grid-template-rows: 1fr 1fr 1fr;*/
+            /*grid-template-columns: repeat(3, 1fr);*/
+            grid-gap: 3px;
+        }
+
+        .cell {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+</div>
+
+</body>
+</html>

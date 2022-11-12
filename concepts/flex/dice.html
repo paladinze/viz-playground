@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dice</title>
+    <style>
+        .dice {
+            background-color: coral;
+            border-radius: 5px;
+            width: 150px;
+            height: 150px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .dot {
+            background-color: black;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+        }
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+
+        .start {
+            display: flex;
+            justify-content: flex-start;
+        }
+        .end {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .space-between {
+            display: flex;
+            justify-content: space-between;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            /*justify-content: space-around;*/
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dice center">
+            <div class="dot"></div>
+        </div>
+
+        <div class="dice" style="display: flex; flex-direction: column; justify-content: space-between">
+            <div class="center"> <div class="dot"></div></div>
+            <div class="center"> <div class="dot"></div></div>
+        </div>
+
+        <div class="dice" style="display: flex; flex-direction: row;">
+            <div class="dot" style="align-self: flex-start"></div>
+            <div class="dot" style="align-self: center"></div>
+            <div class="dot" style="align-self: flex-end"></div>
+        </div>
+
+        <div class="dice" style="display: flex; flex-direction: column; justify-content: space-between" >
+            <div class="space-between">
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="space-between">
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="dice" style="display: flex; flex-direction: column; justify-content: space-between" >
+            <div class="space-between">
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="center">
+                <div class="dot"></div>
+            </div>
+            <div class="space-between">
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="dice" style="display: flex; flex-direction: column; justify-content: space-between" >
+            <div class="space-between">
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="space-between">
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div class="space-between">
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

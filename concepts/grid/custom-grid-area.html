@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template: 1fr 1fr / repeat(3, 1fr);
+            width: 500px;
+            height: 500px;
+        }
+        .item1 {
+            grid-area: 2 / 1 / 2 / span 3;
+            background: coral;
+        }
+        .item2 {
+            grid-area: 1/ 2 / 1 / span 2;
+            background: mediumpurple;
+        }
+        .item3 {
+            background: lightseagreen;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="item1"></div>
+    <div class="item2"></div>
+    <div class="item3"></div>
+</div>
+</body>
+</html>

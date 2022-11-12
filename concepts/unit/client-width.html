@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Use of offsetWidth, ClientWidth
+        and scrollWidth property
+    </title>
+
+    <style>
+        #box {
+            height: 100px;
+            width: 130px;
+            border: 5px black;
+            padding: 10px;
+            margin: 5px;
+            overflow: scroll;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+<div id="box">
+    It is an example of offsetWidth, ClientWidth
+    and scrollWidth property
+</div>
+
+<p>Click on button to get result</p>
+
+<button onClick="display()">
+    Click Here!
+</button>
+
+<div id="result"></div>
+
+<!-- Script to uses offsetWidth, ClientWidth
+    and scrollWidth property -->
+<script>
+  function display() {
+    var ele = document.getElementById("box");
+    var osw = ele.offsetWidth;
+    var sw = ele.scrollWidth;
+    var cw = ele.clientWidth;
+
+    document.getElementById("result").innerHTML
+      = "offsetWidth: " + osw + "px<br>clientWidth: "
+      + cw + "px<br>scrollWidth : " + sw + "px" ;
+  }
+</script>
+</body>
+
+</html>

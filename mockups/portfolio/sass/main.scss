@@ -1,0 +1,26 @@
+@import "sass/abstract/function";
+@import "sass/abstract/mixin";
+@import "sass/abstract/variable";
+
+@import "sass/base/base";
+@import "sass/base/animation";
+@import "sass/base/typography";
+@import "sass/base/utility";
+
+@import "sass/component/button";
+
+@import "sass/page/home";
+
+@import "sass/layout/header";
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}

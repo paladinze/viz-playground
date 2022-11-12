@@ -1,0 +1,51 @@
+<!DOCType html>
+<html>
+<head>
+
+</head>
+<body>
+<button id="color">Click me</button>
+<div id="block1">translate</div>
+
+<style>
+    #color {
+        transition-property: background-color,;
+        transition-duration: 300ms;
+    }
+    #block1 {
+        position: relative;
+        left: 0px;
+        width: 100px;
+        height: 100px;
+        background-color: coral;
+        transition: left 3s cubic-bezier(0.85,-0.01, 0.14, 0.99);
+    }
+</style>
+
+<script>
+  let toggle = false;
+  color.onclick = function() {
+    toggle = !toggle;
+    if (toggle) {
+      this.style.backgroundColor = 'red';
+    } else {
+      this.style.backgroundColor = 'black';
+    }
+
+  };
+
+  let block1Toggle = false;
+  block1.onclick = function () {
+    if (!block1Toggle) {
+        this.style.left = '500px';
+    } else {
+      this.style.left = '0px';
+    }
+    block1Toggle = !block1Toggle
+    setTimeout(() => {
+      this.click()
+    }, 3000)
+  }
+</script>
+</body>
+</html>

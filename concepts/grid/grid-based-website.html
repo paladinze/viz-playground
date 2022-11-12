@@ -1,0 +1,137 @@
+<html>
+<head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    #navbar {
+        text-align: center;
+        grid-column: 1 / 4;
+        grid-row: 1 / 2;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    footer {
+        grid-column: 1/4;
+        grid-row: 4/5;
+    }
+
+    #navbar a{
+        color: coral;
+        background: beige;
+        padding: 20px;
+        text-decoration: none;
+    }
+    #navbar a:hover {
+        background: black;
+        color: white;
+    }
+
+    body {
+        font-family: 'Helvetica Neue',sans-serif;
+        display: grid;
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    #main {
+        grid-row: 2/3;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+
+    #main-area {
+        grid-row: 3/4;
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+    }
+
+    @media only screen and (max-width: 500px) {
+        #main {
+            grid-template-columns: 1fr;
+        }
+
+        #main-area {
+            grid-template-columns: 1fr;
+        }
+
+        nav {
+
+        }
+    }
+
+</style>
+
+</head>
+<body>
+<nav id="navbar">
+    <a href="#">home</a>
+    <a href="#">Profile</a>
+    <a href="#">Products</a>
+    <a href="#">Contact</a>
+    <a href="#">Help</a>
+    <a href="#">FAQ</a>
+</nav>
+
+<main id="main">
+    <section>
+        <h3>Paragraph 1</h3>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam eaque
+            expedita voluptatum reprehenderit nihil ea ipsa et consequatur magni
+            sint libero distinctio debitis minima aliquid nulla ipsum veritatis,
+            totam eligendi.
+        </p>
+    </section>
+
+    <section>
+        <h3>Paragraph 2</h3>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo,
+            fugiat veniam perspiciatis accusamus dolores, amet magni maxime
+            pariatur hic, quasi nihil beatae nobis alias facilis voluptas! In
+            ullam rem vitae?
+        </p>
+    </section>
+
+    <section>
+        <h3>Paragraph 3</h3>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt ab,
+            nobis molestias, mollitia amet, quos esse iusto quae commodi voluptas
+            iure consequatur eum numquam ullam animi id delectus possimus
+            architecto.
+        </p>
+    </section>
+</main>
+
+<div id="main-area">
+    <aside id="sidebar">
+        <h3>Side bar</h3>
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque
+            eaque ratione corrupti illo atque delectus suscipit quisquam ducimus
+            perferendis rem voluptatum cumque officia, nam voluptas.
+        </p>
+    </aside>
+
+    <main id="menu">
+        <h3>Main content</h3>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloremque
+        eaque ratione corrupti illo atque delectus suscipit quisquam ducimus
+        perferendis rem voluptatum cumque officia, nam voluptas, iusto officiis
+        architecto magnam repellat. Lorem ipsum dolor sit amet consectetur
+        adipisicing elit. Velit numquam cumque perspiciatis dolorum aliquam quod
+        consectetur molestiae ut, asperiores, saepe dolores tempora in. Ipsam
+        sequi, non laborum ex consequatur ab.
+    </main>
+</div>
+
+<footer>&#169; 2022 Testing website. All Rights Reserved.</footer>
+</body>
+</html>
