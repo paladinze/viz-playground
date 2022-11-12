@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            font-family: sans-serif;
+            font-weight: normal;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            background: linear-gradient(to right, coral, lightcoral);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .grid {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            grid-template-columns: repeat(4, 100px) ;
+            grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+        }
+
+        .grid > button {
+            cursor: pointer;
+            font-size: 2rem;
+            outline: none;
+            border: 2px solid white;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, .75);
+        }
+
+        .grid > button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .grid > .span-two {
+            grid-column: span 2;
+        }
+
+        .grid > .output {
+            /*grid-column: span 4;*/
+            grid-column: 1 / -1;
+            background-color: rgba(0, 0, 0, .75);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 10px;
+            color: white;
+            word-break: break-all;
+        }
+
+        .output .prev-result {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 2rem;
+        }
+
+        .output .curr-result {
+            color: white;
+            font-size: 2.5rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="grid">
+    <div class="output">
+        <div class="prev-result">123 + 456</div>
+        <div class="curr-result">78123123123123123123123123129</div>
+    </div>
+    <button class="span-two">AC</button>
+    <button>DEL</button>
+    <button>÷</button>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>*</button>
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button>+</button>
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+    <button>-</button>
+    <button>.</button>
+    <button>0</button>
+    <button class="span-two">=</button>
+</div>
+
+
+<script>
+
+</script>
+</body>
+</html>
