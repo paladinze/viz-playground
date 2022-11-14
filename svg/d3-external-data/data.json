@@ -1,0 +1,17 @@
+[
+  {
+    "width": 300,
+    "height": 300,
+    "color": "dodgerBlue"
+  },
+  {
+    "width": 250,
+    "height": 250,
+    "color": "coral"
+  },
+  {
+    "width": 150,
+    "height": 150,
+    "color": "orange"
+  }
+]

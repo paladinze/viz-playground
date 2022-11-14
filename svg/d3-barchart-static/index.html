@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+  const SVG_WIDTH = 1000;
+  const SVG_HEIGHT = 500;
+  const MARGIN_HORIZONTAL = 150;
+  const MARGIN_VERTICAL = 50;
+  const GRAPH_WIDTH = SVG_WIDTH - MARGIN_HORIZONTAL * 2;
+  const GRAPH_HEIGHT = SVG_HEIGHT - MARGIN_VERTICAL * 2;
+
+  const svg = d3.select('.container')
+    .append('svg')
+    .attr('width', SVG_WIDTH)
+    .attr('height', SVG_HEIGHT)
+
+  const graph = svg.append('g')
+    .attr('width', GRAPH_WIDTH)
+    .attr('height', GRAPH_HEIGHT)
+    .attr('transform', `translate(${MARGIN_HORIZONTAL}, ${MARGIN_VERTICAL})`)
+
+  const xAxisGroup = graph.append('g')
+    .attr('transform', `translate(0, ${GRAPH_HEIGHT})`);
+  const yAxisGroup = graph.append('g');
+
+  d3.json('data.json').then((data) => {
+    const max = d3.max(data, (d) => d.val);
+
+    const y = d3.scaleLinear()
+      .domain([0, max])
+      .range([GRAPH_HEIGHT, 0]); // y-axis range
+
+    const x = d3.scaleBand()
+      .domain(data.map(item => item.name))
+      .range([0, GRAPH_WIDTH]) // x-axis range
+      .paddingInner(0.2)
+      .paddingOuter(0.2)
+
+    // bind data
+    const rect = graph.selectAll('rect')
+      .data(data)
+
+    // handle default data
+    rect
+      .attr('x', (d, i) => x(d.name))
+      .attr('y', (d, i) => GRAPH_HEIGHT - y(d.val))
+      .attr('width', (d) => x.bandwidth())
+      .attr('height', (d) => y(d.val))
+      .attr('fill', (d) => 'dodgerBlue');
+
+    // handle extra data
+    rect.enter().append('rect')
+      .attr('x', (d, i) => x(d.name))
+      .attr('y', (d, i) => y(d.val))
+      .attr('width', (d) => x.bandwidth())
+      .attr('height', (d) => GRAPH_HEIGHT - y(d.val))
+      .attr('fill', (d) => 'dodgerBlue');
+
+    const xAxis = d3.axisBottom(x);
+    const yAxis = d3.axisLeft(y)
+      .ticks(4).tickFormat(d => `${d} books`)
+
+    xAxisGroup.call(xAxis);
+    yAxisGroup.call(yAxis);
+
+    xAxisGroup.selectAll('text')
+      .attr('text-anchor', 'end')
+      .attr('transform', 'rotate(-45)')
+      .style('font-weight', 'bold')
+
+
+
+  })
+
+</script>
+</body>
+</html>

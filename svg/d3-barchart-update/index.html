@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<script type="module">
+  const SVG_WIDTH = 1000;
+  const SVG_HEIGHT = 500;
+  const MARGIN_HORIZONTAL = 150;
+  const MARGIN_VERTICAL = 50;
+  const GRAPH_WIDTH = SVG_WIDTH - MARGIN_HORIZONTAL * 2;
+  const GRAPH_HEIGHT = SVG_HEIGHT - MARGIN_VERTICAL * 2;
+
+  const svg = d3.select('.container')
+    .append('svg')
+    .attr('width', SVG_WIDTH)
+    .attr('height', SVG_HEIGHT)
+
+  const graph = svg.append('g')
+    .attr('width', GRAPH_WIDTH)
+    .attr('height', GRAPH_HEIGHT)
+    .attr('transform', `translate(${MARGIN_HORIZONTAL}, ${MARGIN_VERTICAL})`)
+
+  const xAxisGroup = graph.append('g')
+    .attr('transform', `translate(0, ${GRAPH_HEIGHT})`);
+  const yAxisGroup = graph.append('g');
+
+  const y = d3.scaleLinear()
+    .range([GRAPH_HEIGHT, 0]); // y-axis range
+
+  const x = d3.scaleBand()
+    .range([0, GRAPH_WIDTH]) // x-axis range
+    .paddingInner(0.2)
+    .paddingOuter(0.2)
+
+
+  const xAxis = d3.axisBottom(x);
+  const yAxis = d3.axisLeft(y)
+    .ticks(4).tickFormat(d => `\$${d}`)
+
+  xAxisGroup.selectAll('text')
+    .attr('text-anchor', 'end')
+    .attr('transform', 'rotate(-45)')
+    .style('font-weight', 'bold')
+
+
+
+
+  const data = await d3.json('data.json');
+
+  update(data)
+  d3.interval(() => {
+    const itemIdx = Math.floor(Math.random() * data.length)
+    const delta = Math.max(Math.random() * 300, 500)
+    data[itemIdx].val += delta;
+    // console.log(data)
+    update(data)
+  }, 1000)
+
+  function update(data) {
+    // rescale axis scale
+    const max = d3.max(data, (d) => d.val);
+    y.domain([0, max])
+    x.domain(data.map(item => item.name))
+
+    // update axis label
+    xAxisGroup.call(xAxis);
+    yAxisGroup.call(yAxis);
+
+    // bind data
+    const rects = graph.selectAll('rect')
+      .data(data)
+
+    // remove extra DOM node
+    rects.exit().remove()
+
+    // update existing nodes
+    rects
+      .attr('x', (d, i) => x(d.name))
+      .attr('width', (d) => x.bandwidth())
+      .attr('fill', (d) => 'coral')
+      .transition(transitionFactory())
+      .attr('height', (d) => GRAPH_HEIGHT - y(d.val))
+      .attr('y', (d, i) => y(d.val))
+
+    // add node for new data
+    rects.enter().append('rect')
+      .attr('y', GRAPH_HEIGHT)
+      .attr('height', 0)
+      .attr('x', (d, i) => x(d.name))
+      .attr('width', (d) => x.bandwidth())
+      .attr('fill', (d) => 'coral')
+      .transition(transitionFactory())
+      .attr('y', (d, i) => y(d.val))
+      .attr('height', (d) => GRAPH_HEIGHT - y(d.val))
+  }
+
+  function transitionFactory() {
+    return d3.transition()
+      .duration(500)
+  }
+
+</script>
+</body>
+</html>

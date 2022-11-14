@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <svg width="1000" height="1000">
+        <rect></rect>
+    </svg>
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+  const data = [
+    {width: 300, height: 300, color: 'dodgerBlue'},
+    {width: 250, height: 250, color: 'coral'},
+    {width: 150, height: 150, color: 'orange'},
+  ];
+  const svg = d3.select('svg')
+
+  // handle default data
+  const rect = svg.selectAll('rect')
+    .data(data)
+    .attr('width', (d) => d.width)
+    .attr('height', (d) => d.height)
+    .attr('fill', (d) => d.color);
+
+  // handle extra data
+  rect.enter().append('rect')
+    .attr('width', (d) => d.width)
+    .attr('height', (d) => d.height)
+    .attr('fill', (d) => d.color);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+
+</div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+  const canvas = d3.select(".container")
+  const svg = canvas.append("svg").attr('width', 1000).attr('height', 1000);
+  const group = svg.append("g")
+    .attr('transform', 'translate(0, 100)')
+  group.append('rect')
+    .attr('width', 100).attr('height', 100).attr('x', 100).attr('y', 100)
+    .attr('fill', 'blue')
+
+  group.append('text')
+    .attr('x', 300).attr('y', 300)
+    .attr('fill', 'red')
+    .style('font-size', 100)
+    .text('Ze!')
+
+</script>
+</body>
+</html>

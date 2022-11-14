@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Store a",
+    "val": 200
+  },
+  {
+    "name": "Store b",
+    "val": 300
+  },
+  {
+    "name": "Store c",
+    "val": 400
+  },
+  {
+    "name": "Store d",
+    "val": 500
+  },
+  {
+    "name": "Store d",
+    "val": 1500
+  },
+  {
+    "name": "Store e",
+    "val": 750
+  }
+]
