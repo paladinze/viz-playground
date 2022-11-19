@@ -1,0 +1,121 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    padding: 15px;
+}
+
+.header {
+    height: 95vh;
+    background-image: linear-gradient(to right bottom,
+    rgba(21, 21, 21, 0.69),
+    rgba(23, 22, 22, 0.7)), url(../img/hero.jpeg);
+    background-size: cover;
+    background-position: top;
+    clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
+    position: relative;
+}
+
+.logo-container {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+}
+
+.logo {
+    height: 150px;
+}
+
+.logo:hover {
+    animation-timing-function: linear;
+    animation-duration: 2s;
+    animation-name: rotate360;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    user-select: none;
+}
+
+.text-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.heading-primary--main {
+    display: block;
+    color: white;
+    font-size: 75px;
+    font-weight: 400;
+    letter-spacing: 35px;
+    text-align: center;
+    animation-name: moveInLeft;
+    animation-timing-function: ease-in;
+    animation-duration: 1s;
+}
+
+.heading-primary--sub {
+    display: block;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 15px;
+    animation-name: moveInRight;
+    animation-timing-function: ease-in;
+    animation-duration: 1s;
+    text-align: center;
+    vertical-align: center;
+}
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+
+@keyframes rotate360 {
+    0% {
+        transform: rotate3d(1, 1, 0, 0deg);
+    }
+
+    100% {
+        transform: rotate3d(1, 1, 0, 360deg);
+    }
+}
+

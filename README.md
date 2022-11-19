@@ -1,7 +1,7 @@
 
 ## Viz Playground
 
-A collection of experiments on CSS, SVG, D3
+A collection of tiny experiments on basic CSS and SVG concepts
 
 ## project structure
 ```
